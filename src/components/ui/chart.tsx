@@ -98,7 +98,7 @@ ${colorConfig
 
 const ChartTooltip = RechartsPrimitive.Tooltip;
 
-/* ✅ Fixed Tooltip Typing */
+// ✅ Define clean tooltip payload type
 type TooltipPayloadItem = {
   name?: string;
   dataKey?: string;
@@ -265,17 +265,26 @@ function ChartTooltipContent({
 
 const ChartLegend = RechartsPrimitive.Legend;
 
+// ✅ Fixed type: define our own minimal LegendProps
+type CustomLegendProps = {
+  payload?: Array<{
+    value: string;
+    color?: string;
+    dataKey?: string;
+  }>;
+  verticalAlign?: "top" | "bottom" | "middle";
+  className?: string;
+  hideIcon?: boolean;
+  nameKey?: string;
+};
+
 function ChartLegendContent({
   className,
   hideIcon = false,
   payload,
   verticalAlign = "bottom",
   nameKey,
-}: React.ComponentProps<"div"> &
-  Pick<RechartsPrimitive.LegendProps, "payload" | "verticalAlign"> & {
-    hideIcon?: boolean;
-    nameKey?: string;
-  }) {
+}: CustomLegendProps) {
   const { config } = useChart();
   if (!payload?.length) return null;
 
@@ -305,7 +314,7 @@ function ChartLegendContent({
                 style={{ backgroundColor: item.color }}
               />
             )}
-            {itemConfig?.label}
+            {itemConfig?.label || item.value}
           </div>
         );
       })}
