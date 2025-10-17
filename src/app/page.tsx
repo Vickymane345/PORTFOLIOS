@@ -22,6 +22,7 @@ import { Boxes as BackgroundBoxes } from "@/components/ui/background-boxes";
 import { motion } from "framer-motion";
 import { useRef, useState } from "react";
 import emailjs from "@emailjs/browser";
+import Image from "next/image";
 
 const email1 = "victorchikwado122@gmail.com";
 const subject = "Hello from your website";
@@ -193,7 +194,7 @@ export default function Home() {
                 viewport={{ once: true }}
                 className="relative aspect-[4/3] w-full overflow-hidden rounded-xl border border-border bg-card shadow-sm"
               >
-                <img
+                <Image
                   src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?q=80&w=1200&auto=format&fit=crop"
                   alt="Workspace with code and design"
                   className="h-full w-full object-cover"
@@ -601,7 +602,7 @@ function ProjectCard({
       <div className="group rounded-xl p-[1px] bg-[conic-gradient(at_top_left,_var(--chart-4),_var(--chart-2),_var(--chart-1),_var(--chart-5),_var(--chart-3),_var(--chart-4))] [perspective:1200px]">
         <Card className="overflow-hidden rounded-[calc(var(--radius)+2px)] bg-card/80 backdrop-blur border-border/60 transition-transform duration-300 transform-gpu group-hover:-translate-y-1 group-hover:[transform:rotateX(2deg)_rotateY(-3deg)] group-hover:shadow-[0_0_0_1px_var(--chart-2)_inset,0_0_40px_-10px_var(--chart-2)]">
           <div className="relative aspect-[4/3] w-full overflow-hidden">
-            <img
+            <Image
               src={image}
               alt={title}
               className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-[1.03]"
