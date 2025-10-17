@@ -2,7 +2,6 @@
 
 import * as React from "react";
 import * as RechartsPrimitive from "recharts";
-import type { TooltipProps } from "recharts";
 
 import { cn } from "@/lib/utils";
 
@@ -99,7 +98,41 @@ ${colorConfig
 
 const ChartTooltip = RechartsPrimitive.Tooltip;
 
-// ✅ FIXED typing here
+/* ✅ Fixed Tooltip Typing */
+type TooltipPayloadItem = {
+  name?: string;
+  dataKey?: string;
+  value?: any;
+  payload?: Record<string, any>;
+  color?: string;
+  fill?: string;
+};
+
+type CustomTooltipProps = {
+  active?: boolean;
+  payload?: TooltipPayloadItem[] | null;
+  label?: any;
+  labelFormatter?: (
+    label: any,
+    payload?: TooltipPayloadItem[] | null
+  ) => React.ReactNode;
+  formatter?: (
+    value: any,
+    name?: string,
+    props?: TooltipPayloadItem,
+    index?: number,
+    payload?: Record<string, any>
+  ) => React.ReactNode;
+  className?: string;
+  labelClassName?: string;
+  color?: string;
+  hideLabel?: boolean;
+  hideIndicator?: boolean;
+  indicator?: "line" | "dot" | "dashed";
+  nameKey?: string;
+  labelKey?: string;
+};
+
 function ChartTooltipContent({
   active,
   payload,
@@ -114,14 +147,7 @@ function ChartTooltipContent({
   color,
   nameKey,
   labelKey,
-}: TooltipProps<any, any> &
-  React.ComponentProps<"div"> & {
-    hideLabel?: boolean;
-    hideIndicator?: boolean;
-    indicator?: "line" | "dot" | "dashed";
-    nameKey?: string;
-    labelKey?: string;
-  }) {
+}: CustomTooltipProps) {
   const { config } = useChart();
 
   const tooltipLabel = React.useMemo(() => {
@@ -169,11 +195,11 @@ function ChartTooltipContent({
         {payload.map((item, index) => {
           const key = `${nameKey || item.name || item.dataKey || "value"}`;
           const itemConfig = getPayloadConfigFromPayload(config, item, key);
-          const indicatorColor = color || item.payload.fill || item.color;
+          const indicatorColor = color || item.payload?.fill || item.color;
 
           return (
             <div
-              key={item.dataKey}
+              key={item.dataKey ?? index}
               className={cn(
                 "[&>svg]:text-muted-foreground flex w-full flex-wrap items-stretch gap-2 [&>svg]:h-2.5 [&>svg]:w-2.5",
                 indicator === "dot" && "items-center"
@@ -219,9 +245,11 @@ function ChartTooltipContent({
                         {itemConfig?.label || item.name}
                       </span>
                     </div>
-                    {item.value && (
+                    {item.value !== undefined && item.value !== null && (
                       <span className="text-foreground font-mono font-medium tabular-nums">
-                        {item.value.toLocaleString()}
+                        {typeof item.value === "number"
+                          ? item.value.toLocaleString()
+                          : String(item.value)}
                       </span>
                     )}
                   </div>
