@@ -68,7 +68,7 @@ export default function Home() {
           <div className="flex items-center gap-2">
             <span className="inline-block h-3 w-3 rounded-full bg-gradient-to-tr from-fuchsia-500 via-sky-400 to-emerald-400" />
             <span className="text-sm font-semibold tracking-wide">
-              O. Frontend Dev
+              V. Frontend Dev
             </span>
           </div>
 
