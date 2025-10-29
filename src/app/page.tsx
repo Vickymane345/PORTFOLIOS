@@ -22,10 +22,9 @@ import { Boxes as BackgroundBoxes } from "@/components/ui/background-boxes";
 import { motion } from "framer-motion";
 import { useRef, useState } from "react";
 import emailjs from "@emailjs/browser";
-import Image from "next/image";
 
 const email1 = "victorchikwado122@gmail.com";
-const subject = "Hello from your website";
+const subject = "Inquiry from Portfolio Website";
 const body2 = "Hi,How may i be at your service.";
 
 const mailtoLink = `mailto:${email1}?subject=${encodeURIComponent(
@@ -59,21 +58,22 @@ export default function Home() {
         }
       );
   };
+
   return (
     <div className="min-h-screen bg-background text-foreground font-sans pb-24 sm:pb-0">
+      {/* Scroll progress bar */}
       <ScrollProgress />
-
+      {/* Navigation */}
       <header className="sticky top-0 z-50 backdrop-blur supports-[backdrop-filter]:bg-background/60 border-b border-border">
         <div className="mx-auto max-w-6xl px-4 py-3 flex items-center justify-between">
           <div className="flex items-center gap-2">
             <span className="inline-block h-3 w-3 rounded-full bg-gradient-to-tr from-fuchsia-500 via-sky-400 to-emerald-400" />
             <span className="text-sm font-semibold tracking-wide">
-              V. Frontend Dev
+              O. Frontend Dev
             </span>
           </div>
-
+          {/* Mobile menu button */}
           <button
-            type="button"
             aria-label={navOpen ? "Close navigation" : "Open navigation"}
             aria-expanded={navOpen}
             aria-controls="mobile-nav"
@@ -92,11 +92,15 @@ export default function Home() {
             <a href="#education" className="hover:opacity-80">
               Education
             </a>
+            <a href="#services" className="hover:opacity-80">
+              Services
+            </a>
             <a href="#contact" className="hover:opacity-80">
               Contact
             </a>
           </nav>
         </div>
+        {/* Mobile dropdown */}
         {navOpen && (
           <div id="mobile-nav" className="md:hidden border-t border-border">
             <nav className="mx-auto max-w-6xl px-4 py-3 grid gap-2 text-sm">
@@ -123,6 +127,13 @@ export default function Home() {
               </a>
               <a
                 onClick={() => setNavOpen(false)}
+                href="#services"
+                className="rounded-md px-2 py-2 hover:bg-card"
+              >
+                Services
+              </a>
+              <a
+                onClick={() => setNavOpen(false)}
                 href="#contact"
                 className="rounded-md px-2 py-2 hover:bg-card"
               >
@@ -133,11 +144,15 @@ export default function Home() {
         )}
       </header>
 
+      {/* Hero Section */}
       <section className="relative overflow-hidden">
+        {/* Animated background boxes with deep color accents (no white) */}
         <BackgroundBoxes className="absolute inset-0 opacity-[0.08]" />
+        {/* Aurora / Conic glows */}
         <div className="pointer-events-none absolute -top-24 -left-24 h-72 w-72 rounded-full blur-3xl bg-gradient-to-br from-fuchsia-700/40 via-violet-700/35 to-sky-700/40" />
         <div className="pointer-events-none absolute -bottom-24 -right-24 h-80 w-80 rounded-full blur-3xl bg-gradient-to-tr from-emerald-700/40 via-cyan-700/35 to-indigo-700/40" />
         <div className="pointer-events-none absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 h-[36rem] w-[36rem] rounded-full opacity-20 blur-[100px] bg-[conic-gradient(at_50%_50%,_var(--chart-4),_var(--chart-2),_var(--chart-1),_var(--chart-5),_var(--chart-3),_var(--chart-4))]" />
+        {/* Masked grid overlay */}
         <div className="pointer-events-none absolute inset-0 opacity-15 bg-[linear-gradient(0deg,transparent_95%,var(--border)),linear-gradient(90deg,transparent_95%,var(--border))] bg-[size:22px_22px] [mask-image:radial-gradient(ellipse_at_center,black,transparent_70%)]" />
 
         <div className="relative mx-auto max-w-6xl px-4 py-16 sm:py-24">
@@ -194,7 +209,7 @@ export default function Home() {
                 viewport={{ once: true }}
                 className="relative aspect-[4/3] w-full overflow-hidden rounded-xl border border-border bg-card shadow-sm"
               >
-                <Image
+                <img
                   src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?q=80&w=1200&auto=format&fit=crop"
                   alt="Workspace with code and design"
                   className="h-full w-full object-cover"
@@ -204,6 +219,7 @@ export default function Home() {
                   <Badge variant="outline">Open to Work</Badge>
                   <Badge variant="outline">Remote/Hybrid</Badge>
                 </div>
+                {/* Floating chips */}
                 <motion.span
                   initial={{ y: -6, opacity: 0 }}
                   animate={{ y: [-6, 6, -6], opacity: 1 }}
@@ -260,10 +276,12 @@ export default function Home() {
         </div>
       </section>
 
+      {/* Aurora ribbon divider */}
       <div aria-hidden className="relative h-10 sm:h-14">
         <div className="absolute inset-0 -skew-y-3 bg-[linear-gradient(90deg,var(--chart-4),var(--chart-2),var(--chart-1))] opacity-15" />
       </div>
 
+      {/* Projects Section */}
       <section id="projects" className="relative scroll-mt-20 sm:scroll-mt-24">
         <div className="mx-auto max-w-6xl px-4 py-16 sm:py-24">
           <div className="mb-8 sm:mb-12">
@@ -442,6 +460,80 @@ export default function Home() {
         </div>
       </section>
 
+      {/* Services & Pricing */}
+      <section id="services" className="relative scroll-mt-20 sm:scroll-mt-24">
+        <div className="mx-auto max-w-6xl px-4 py-16">
+          <div className="mb-8">
+            <SectionLabel text="Services" />
+            <div className="mt-3 h-px bg-gradient-to-r from-transparent via-[var(--chart-4)] to-transparent" />
+            <h2 className="mt-4 text-3xl font-bold">Services & Pricing</h2>
+            <p className="mt-2 text-muted-foreground">
+              Professional development services with transparent pricing.
+            </p>
+          </div>
+
+          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+            <ServiceCard
+              title="Landing Page"
+              price="$2,500"
+              description="Single-page website with modern design, responsive layout, and smooth animations."
+              features={[
+                "Responsive Design",
+                "Modern UI/UX",
+                "Fast Load Times",
+                "SEO Optimized",
+              ]}
+            />
+            <ServiceCard
+              title="Frontend"
+              price="$5,000"
+              description="Multi-page frontend application with SEO, routing, and API integration."
+              features={[
+                "Multiple Pages",
+                "SEO Optimization",
+                "API Integration",
+                "State Management",
+              ]}
+              highlighted
+            />
+            <ServiceCard
+              title="Full Stack"
+              price="$10,000"
+              description="Complete web application with frontend, backend, database, and deployment."
+              features={[
+                "Frontend & Backend",
+                "Database Setup",
+                "Authentication",
+                "Full Deployment",
+              ]}
+            />
+            <ServiceCard
+              title="Portfolio"
+              price="$3,000"
+              description="Personal portfolio website showcasing your work with custom design and interactions."
+              features={[
+                "Custom Design",
+                "Project Showcase",
+                "Contact Form",
+                "Responsive Layout",
+              ]}
+            />
+          </div>
+
+          <div className="mt-8 rounded-xl border border-border bg-card/50 p-6 text-center">
+            <p className="text-sm text-muted-foreground">
+              All projects include source code, documentation, and 30 days of
+              support. Custom requirements? Let's discuss your specific needs.
+            </p>
+            <Button asChild className="mt-4">
+              <a href="#contact" className="flex items-center gap-2">
+                Get Started <ArrowRight className="h-4 w-4" />
+              </a>
+            </Button>
+          </div>
+        </div>
+      </section>
+
       {/* Contact */}
       <section id="contact" className="relative scroll-mt-20 sm:scroll-mt-24">
         <div className="mx-auto max-w-6xl px-4 py-16">
@@ -602,7 +694,7 @@ function ProjectCard({
       <div className="group rounded-xl p-[1px] bg-[conic-gradient(at_top_left,_var(--chart-4),_var(--chart-2),_var(--chart-1),_var(--chart-5),_var(--chart-3),_var(--chart-4))] [perspective:1200px]">
         <Card className="overflow-hidden rounded-[calc(var(--radius)+2px)] bg-card/80 backdrop-blur border-border/60 transition-transform duration-300 transform-gpu group-hover:-translate-y-1 group-hover:[transform:rotateX(2deg)_rotateY(-3deg)] group-hover:shadow-[0_0_0_1px_var(--chart-2)_inset,0_0_40px_-10px_var(--chart-2)]">
           <div className="relative aspect-[4/3] w-full overflow-hidden">
-            <Image
+            <img
               src={image}
               alt={title}
               className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-[1.03]"
@@ -725,5 +817,77 @@ function QuickDock() {
         </div>
       </div>
     </div>
+  );
+}
+
+function ServiceCard({
+  title,
+  price,
+  description,
+  features,
+  highlighted,
+}: {
+  title: string;
+  price: string;
+  description: string;
+  features: string[];
+  highlighted?: boolean;
+}) {
+  return (
+    <Card
+      className={
+        highlighted ? "border-2 border-primary/50" : "border border-border/60"
+      }
+    >
+      <CardHeader>
+        <div className="flex items-center justify-between">
+          <div>
+            <CardTitle className="text-lg">{title}</CardTitle>
+            <p className="text-2xl font-bold">{price}</p>
+          </div>
+          {highlighted && (
+            <Badge className="bg-gradient-to-r from-fuchsia-500 to-pink-500 text-primary-foreground">
+              Featured
+            </Badge>
+          )}
+        </div>
+      </CardHeader>
+      <CardContent>
+        <p className="text-muted-foreground">{description}</p>
+        <ul className="mt-4 space-y-2">
+          {features.map((feature, i) => (
+            <li key={i} className="flex items-center gap-2">
+              <Check className="h-4 w-4 text-primary-foreground" />
+              <span>{feature}</span>
+            </li>
+          ))}
+        </ul>
+      </CardContent>
+      <CardFooter>
+        <Button asChild className="w-full">
+          <a href="#contact" className="flex items-center justify-center gap-2">
+            {highlighted ? "Get Started" : "Learn More"}
+            <ArrowRight className="h-4 w-4" />
+          </a>
+        </Button>
+      </CardFooter>
+    </Card>
+  );
+}
+
+function Check({ className }: { className?: string }) {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      className={className}
+      viewBox="0 0 20 20"
+      fill="currentColor"
+    >
+      <path
+        fillRule="evenodd"
+        d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+        clipRule="evenodd"
+      />
+    </svg>
   );
 }
